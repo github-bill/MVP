@@ -57,6 +57,7 @@ android {
                         fileName = "MVP.apk"
                     }
                 }
+            println "APK路径：${fileName}"
             outputFileName = fileName
         }
     }
