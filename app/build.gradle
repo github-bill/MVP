@@ -1,4 +1,41 @@
 apply plugin: 'com.android.application'
+def releaseTime() {
+    return new Date().format("yyyy-MM-dd")
+}
+
+/**
+ * 获取本地svn版本号，不准,故本地打包不是用svn版本号
+ * @return
+ */
+def getSvnRevision() {
+    new ByteArrayOutputStream().withStream { os ->
+        def result = exec {
+            executable = 'svn'
+            args = ['info']
+            standardOutput = os
+        }
+        def outputAsString = os.toString()
+        def matchLastChangedRev = outputAsString =~ /Last Changed Rev: (\d+)/
+
+        ext.svnRev = "${matchLastChangedRev[0][1]}".toInteger()
+    }
+    return svnRev
+}
+
+
+/**
+ * 根据不同平台来获取版本号
+ */
+def getSvnRevisionByPlatform() {
+    boolean flag = "true".equals(IS_JENKINS)
+    if (flag) {
+        ext.env = System.getenv()
+        ext.svnNum = env.SVN_REVISION?.toInteger()
+        return "$svnNum"
+    } else {
+        return getSvnRevision()
+    }
+}
 
 android {
     compileSdkVersion 27
@@ -19,6 +56,30 @@ android {
     lintOptions {
         checkReleaseBuilds false
         abortOnError false
+    }
+
+    applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            def outputFile = output.outputFile
+            if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                def fileName
+                def nowTime
+                if ("true".equals(IS_JENKINS)) {
+                    //jenkins的动态参数插件，存在bug，自动构建时无法获取到时间，这里去掉时间
+                    //这里的xxxxxx为自己的项目名称
+                    fileName = "xxxxxx_v${defaultConfig.versionName}_${variant.productFlavors[0].name}_${getSvnRevisionByPlatform()}.apk"
+                } else {
+                    nowTime = releaseTime()
+                    //本地获取svn版本号不准，或者需要导入插件，故本地不获取版本号
+                    if (variant.buildType.name.equals('release')) {
+                        fileName = "xxxxxx_v${defaultConfig.versionName}_${nowTime}_${variant.productFlavors[0].name}.apk"
+                    } else if (variant.buildType.name.equals('debug')) {
+                        fileName = "xxxxxx_t${defaultConfig.versionName}_${nowTime}_${variant.productFlavors[0].name}.apk"
+                    }
+                }
+                output.outputFile = new File(outputFile.parent, fileName)
+            }
+        }
     }
 }
 
