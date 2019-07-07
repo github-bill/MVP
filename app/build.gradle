@@ -43,7 +43,7 @@ android {
     applicationVariants.all { variant ->
         variant.outputs.all {
             // 自定义输出路径
-            variant.getPackageApplication().outputDirectory = new File(project.rootDir.absolutePath + File.separator + "outputs")
+            variant.getPackageApplication().outputDirectory = new File("/usr/local/tomcat/apache-tomcat-8.5.42/file/apk")
             // 自定义文件名
             def fileName
             def nowTime
