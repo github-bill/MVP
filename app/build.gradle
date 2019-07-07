@@ -43,16 +43,16 @@ android {
     applicationVariants.all { variant ->
         variant.outputs.all {
             // 自定义输出路径
-            variant.getPackageApplication().outputDirectory = new File("/hxb/file/apk")
+            if (OUTPUT_PATH!=null&&!OUTPUT_PATH.equals("")){
+                variant.getPackageApplication().outputDirectory = new File(OUTPUT_PATH)
+            }
+
             // 自定义文件名
             def fileName
-            def nowTime
             if ("true".equals(IS_JENKINS)) {
-                nowTime = BUILD_TIME
-                fileName = "MVP_v${APP_VERSION}_${nowTime}_${variant.productFlavors[0].name}_${variant.buildType.name}_Jenkis.apk"
+                fileName = "MVP_v${APP_VERSION}_${BUILD_TIME}_${PRODUCT_FLAVORS}_${BUILD_TYPE}_Jenkins.apk"
             } else {
-                nowTime = releaseTime()
-                fileName = "MVP_v${defaultConfig.versionName}_${nowTime}_${variant.productFlavors[0].name}_${variant.buildType.name}.apk"
+                fileName = "MVP_v${defaultConfig.versionName}_${releaseTime()}_${variant.productFlavors[0].name}_${variant.buildType.name}.apk"
             }
             outputFileName = fileName
         }
