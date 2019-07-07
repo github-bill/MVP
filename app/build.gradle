@@ -42,17 +42,18 @@ android {
 
     applicationVariants.all { variant ->
         variant.outputs.all {
-                def fileName
-                def nowTime
-                if ("true".equals(IS_JENKINS)) {
-                    nowTime = BUILD_TIME
-                    fileName = "MVP_v${APP_VERSION}_${nowTime}_${variant.productFlavors[0].name}_${variant.buildType.name}_Jenkis.apk"
-                } else {
-                    nowTime = releaseTime()
-                    fileName = "MVP_v${defaultConfig.versionName}_${nowTime}_${variant.productFlavors[0].name}_${variant.buildType.name}.apk"
-                }
-            println "APK原有路径：${outputFileName}"
-            println "APK路径：${fileName}"
+            // 自定义输出路径
+            variant.getPackageApplication().outputDirectory = new File(project.rootDir.absolutePath + File.separator + "outputs")
+            // 自定义文件名
+            def fileName
+            def nowTime
+            if ("true".equals(IS_JENKINS)) {
+                nowTime = BUILD_TIME
+                fileName = "MVP_v${APP_VERSION}_${nowTime}_${variant.productFlavors[0].name}_${variant.buildType.name}_Jenkis.apk"
+            } else {
+                nowTime = releaseTime()
+                fileName = "MVP_v${defaultConfig.versionName}_${nowTime}_${variant.productFlavors[0].name}_${variant.buildType.name}.apk"
+            }
             outputFileName = fileName
         }
     }
