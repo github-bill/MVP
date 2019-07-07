@@ -46,17 +46,12 @@ android {
                 def nowTime
                 if ("true".equals(IS_JENKINS)) {
                     nowTime = BUILD_TIME
-                    fileName = "MVP_v${APP_VERSION}_${nowTime}_${variant.productFlavors[0].name}}.apk"
+                    fileName = "MVP_v${APP_VERSION}_${nowTime}_${variant.productFlavors[0].name}_${variant.buildType.name}_Jenkis.apk"
                 } else {
                     nowTime = releaseTime()
-                    if (variant.buildType.name.equals('release')) {
-                        fileName = "MVP_v${defaultConfig.versionName}_${nowTime}_${variant.productFlavors[0].name}.apk"
-                    } else if (variant.buildType.name.equals('debug')) {
-                        fileName = "MVP_v${defaultConfig.versionName}_${nowTime}_${variant.productFlavors[0].name}.apk"
-                    }else {
-                        fileName = "MVP.apk"
-                    }
+                    fileName = "MVP_v${defaultConfig.versionName}_${nowTime}_${variant.productFlavors[0].name}_${variant.buildType.name}.apk"
                 }
+            println "APK原有路径：${outputFileName}"
             println "APK路径：${fileName}"
             outputFileName = fileName
         }
