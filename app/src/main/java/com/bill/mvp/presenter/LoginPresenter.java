@@ -47,7 +47,7 @@ public class LoginPresenter implements ILoginPresenter {
 
         Object obj=null;
         if (obj.toString().equalsIgnoreCase("")){
-            
+
         }
 
 

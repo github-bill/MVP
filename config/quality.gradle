@@ -21,7 +21,7 @@ task checkstyle(type: Checkstyle) {
 }
 
 task findbugs(type: FindBugs) {
-    ignoreFailures = false
+    ignoreFailures = true //false:在静态代码分析检查期间遇到任何问题，构建将失败
     effort = "max"
     reportLevel = "high"
     excludeFilter = new File("$configDir/findbugs/findbugs-filter.xml")
@@ -46,7 +46,7 @@ task findbugs(type: FindBugs) {
 }
 
 task pmd(type: Pmd) {
-    ignoreFailures = false
+    ignoreFailures = true
     ruleSetFiles = files("$configDir/pmd/pmd-ruleset.xml")
     ruleSets = []
 
