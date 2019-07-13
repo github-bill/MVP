@@ -31,6 +31,20 @@ public class LoginPresenter implements ILoginPresenter {
 
         iLoginView.showProgressBar();
 
+        int i=0;
+
+        try{
+
+        }catch (Exception e){
+
+        }
+
+        if (true){
+
+        }else {
+
+        }
+
         final boolean isLoginSuccess = iLoginModel.checkValidity(userName, password);
 
         new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
