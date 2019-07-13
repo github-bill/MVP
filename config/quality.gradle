@@ -7,11 +7,9 @@ check.dependsOn 'checkstyle', 'findbugs', 'pmd', 'lint'
 def configDir = "${project.rootDir}/config/quality"
 def reportsDir = "${project.buildDir}/reports"
 
-checkstyle {
-    toolVersion = '8.22'
-}
 
 task checkstyle(type: Checkstyle) {
+    toolVersion "7.6.1"
     ignoreFailures = true
     configFile file("$configDir/checkstyle/checkstyle.xml")
     configProperties.checkstyleSuppressionsPath = file("$configDir/checkstyle/suppressions.xml").absolutePath
