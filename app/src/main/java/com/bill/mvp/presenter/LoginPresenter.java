@@ -45,6 +45,10 @@ public class LoginPresenter implements ILoginPresenter {
 
         }
 
+        Object obj=null;
+        if (obj.toString().equalsIgnoreCase("")){
+            
+        }
 
 
         final boolean isLoginSuccess = iLoginModel.checkValidity(userName, password);
@@ -60,9 +64,5 @@ public class LoginPresenter implements ILoginPresenter {
                 }
             }
         }, 5000);
-    }
-    public void foo() {
-        int x,y;
-        x = x = 17;
     }
 }
