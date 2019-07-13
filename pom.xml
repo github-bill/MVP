@@ -1,32 +1,28 @@
 <project>
-    <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>findbugs-maven-plugin</artifactId>
-        <version>3.0.1</version>
-        <configuration>
-            <threshold>High</threshold>
-            <effort>Default</effort>
-            <findbugsXmlOutput>true</findbugsXmlOutput>
-            <findbugsXmlWithMessages>true</findbugsXmlWithMessages>
-            <xmlOutput>true</xmlOutput>
-            <findbugsXmlOutputDirectory>target/site</findbugsXmlOutputDirectory>
-        </configuration>
-    </plugin>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.bill</groupId>
+    <artifactId>demo</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
 
-    <reporting>
+    <name>MVP</name>
+    <url>http://maven.apache.org</url>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <build>
+        <defaultGoal>compile</defaultGoal>
         <plugins>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>findbugs-maven-plugin</artifactId>
                 <version>3.0.1</version>
                 <configuration>
-                    <xmlOutput>true</xmlOutput>
-                    <!-- Optional directoryto put findbugs xdoc xml report -->
-                    <!--<xmlOutputDirectory>target/site</xmlOutputDirectory>-->
                     <findbugsXmlOutput>true</findbugsXmlOutput>
                     <findbugsXmlWithMessages>true</findbugsXmlWithMessages>
+                    <xmlOutput>true</xmlOutput>
                 </configuration>
             </plugin>
         </plugins>
-    </reporting>
+    </build>
 </project>
