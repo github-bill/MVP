@@ -45,6 +45,8 @@ public class LoginPresenter implements ILoginPresenter {
 
         }
 
+
+
         final boolean isLoginSuccess = iLoginModel.checkValidity(userName, password);
 
         new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
@@ -58,5 +60,9 @@ public class LoginPresenter implements ILoginPresenter {
                 }
             }
         }, 5000);
+    }
+    public void foo() {
+        int x,y;
+        x = x = 17;
     }
 }
