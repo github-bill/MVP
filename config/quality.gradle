@@ -12,6 +12,7 @@ checkstyle {
 }
 
 task checkstyle(type: Checkstyle) {
+    ignoreFailures = true
     configFile file("$configDir/checkstyle/checkstyle.xml")
     configProperties.checkstyleSuppressionsPath = file("$configDir/checkstyle/suppressions.xml").absolutePath
     source 'src'
