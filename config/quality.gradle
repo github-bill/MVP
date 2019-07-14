@@ -23,10 +23,10 @@ task checkstyle(type: Checkstyle) {
         xml.enabled = true
         html.enabled = false
         xml {
-            destination (new File("$reportsDir/checkstyle/checkstyle.xml"))
+            destination (new File("$reportsDir/checkstyle/checkstyle-result.xml"))
         }
         html {
-            destination (new File("$reportsDir/checkstyle/checkstyle.html"))
+            destination (new File("$reportsDir/checkstyle/checkstyle-result.html"))
         }
     }
 }
