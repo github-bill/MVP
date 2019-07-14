@@ -2,7 +2,7 @@ apply plugin: 'checkstyle'
 apply plugin: 'findbugs'
 apply plugin: 'pmd'
 
-check.dependsOn 'checkstyle', 'findbugs', 'pmd'
+check.dependsOn 'checkstyle', 'findbugs', 'pmd', 'lint'
 
 def configDir = "${project.rootDir}/config/quality"
 def reportsDir = "${project.buildDir}/reports"
@@ -31,7 +31,7 @@ task checkstyle(type: Checkstyle) {
     }
 }
 
-task findbugs(type: FindBugs) {
+task findbugs(type: FindBugs, dependsOn: "assembleDebug") {
     ignoreFailures = true //false:在静态代码分析检查期间遇到任何问题，构建将失败
     effort = "max"
     reportLevel = "high"
